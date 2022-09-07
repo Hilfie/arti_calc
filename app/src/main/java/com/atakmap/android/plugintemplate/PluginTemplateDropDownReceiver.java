@@ -40,7 +40,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     private final EditText azimuthEditText;
     private final EditText distanceEditText;
     private final Button calculate_xys;
-    private final Button refresh_cords;
+    //private final Button refresh_cords;
     double Xb;
     double Yb;
 
@@ -105,7 +105,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         distanceEditText = calculateView.findViewById(R.id.target_distance);
 
         calculate_xys = calculateView.findViewById(R.id.calculate_xys);
-        refresh_cords = calculateView.findViewById(R.id.refresh_cords);
+        //refresh_cords = calculateView.findViewById(R.id.refresh_cords);
 
 
         double latitude = mapView.getSelfMarker().getPoint().getLatitude();
@@ -145,9 +145,9 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
         });
 
-        refresh_cords.setOnClickListener(view -> {
-          textView.setText(longAndLat);
-        });
+//        refresh_cords.setOnClickListener(view -> {
+//          textView.setText(longAndLat);
+//        });
 
     }
 
