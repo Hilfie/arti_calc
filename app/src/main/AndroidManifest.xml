@@ -5,7 +5,7 @@
 
     <application 
         android:allowBackup="false"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/calc_icon"
         android:label="@string/calculator"
         android:description="@string/app_desc"
         android:extractNativeLibs="true"

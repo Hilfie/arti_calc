@@ -4,7 +4,6 @@
     <string name="app_name">Calculator</string>
     <!-- description -->
     <string name="app_desc">Plugin used to calculate coordinates of an enemy basing on actual position, distance and azimuth</string>
-
     <string name="calculator">Position Calculator for ATAK</string>
     <string name="send_location">Send location</string>
     <string name="actual_location">Actual position</string>
