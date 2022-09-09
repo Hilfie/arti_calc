@@ -1,11 +1,16 @@
 
 package com.atakmap.android.plugintemplate;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.atak.plugins.impl.PluginLayoutInflater;
@@ -19,6 +24,8 @@ import com.atakmap.coremap.cot.event.CotEvent;
 import com.atakmap.coremap.cot.event.CotPoint;
 import com.atakmap.coremap.log.Log;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
+
+
 
 public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         OnStateListener {
@@ -62,6 +69,9 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         textView = calculateView.findViewById(R.id.longLatTextView);
         calculatedPos = calculateView.findViewById(R.id.calculated_LongAndLat);
 
+        ImageView turret_imageView = calculateView.findViewById(R.id.turret_image);
+        ImageView hull_imageView = calculateView.findViewById(R.id.hull_image);
+
         azimuthEditText = calculateView.findViewById(R.id.target_azimuth);
         hullEditText = calculateView.findViewById(R.id.hull_azimuth);
         distanceEditText = calculateView.findViewById(R.id.target_distance);
@@ -104,7 +114,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             CotEvent cotEvent = new CotEvent();
             CoordinatedTime time = new CoordinatedTime();
 
-            cotEvent.setUID("artylerzysta");
+            cotEvent.setUID("enemy_location");
             cotEvent.setTime(time);
             cotEvent.setStart(time);
             cotEvent.setHow("h-e");
@@ -127,7 +137,51 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             textView.setText(up_longAndLat);
         });
 
-    }
+    //noinspection AndroidLintClickableViewAccessibility
+    turret_imageView.setOnTouchListener(new View.OnTouchListener() {
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View view, android.view.MotionEvent motionEvent) {
+            ViewGroup.LayoutParams params = view.getLayoutParams();
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    params.width = 1000;
+                    params.height = 1000;
+                    view.setLayoutParams(params);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    params.width = 55;
+                    params.height = 55;
+                    view.setLayoutParams(params);
+                    break;
+            }
+            return true;
+        }
+    });
+        //noinspection AndroidLintClickableViewAccessibility
+        hull_imageView.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View view, android.view.MotionEvent motionEvent) {
+                ViewGroup.LayoutParams params = view.getLayoutParams();
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        params.width = 1000;
+                        params.height = 1000;
+                        view.setLayoutParams(params);
+//                        hull_imageView.getLayoutParams().width = 100;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        params.width = 55;
+                        params.height = 55;
+                        view.setLayoutParams(params);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        }
 
     /**************************** PUBLIC METHODS *****************************/
 //
