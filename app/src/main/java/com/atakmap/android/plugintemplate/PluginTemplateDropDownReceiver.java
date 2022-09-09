@@ -65,23 +65,29 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
         /*********************** CALCULATOR ***************************/
 
+        //elementary views
         calculateView = PluginLayoutInflater.inflate(context, R.layout.calculator_layout, null);
         textView = calculateView.findViewById(R.id.longLatTextView);
         calculatedPos = calculateView.findViewById(R.id.calculated_LongAndLat);
 
+        //images
         ImageView turret_imageView = calculateView.findViewById(R.id.turret_image);
         ImageView hull_imageView = calculateView.findViewById(R.id.hull_image);
 
+        //edit_texts
         azimuthEditText = calculateView.findViewById(R.id.target_azimuth);
         hullEditText = calculateView.findViewById(R.id.hull_azimuth);
         distanceEditText = calculateView.findViewById(R.id.target_distance);
 
+        //buttons
         Button calculate_xys = calculateView.findViewById(R.id.calculate_xys);
         Button refresh_cords = calculateView.findViewById(R.id.refresh_cords);
 
+        //wstępne ustalanie położenia
         latitude = mapView.getSelfMarker().getPoint().getLatitude();
         longitude = mapView.getSelfMarker().getPoint().getLongitude();
 
+        //wypisanie położenia
         String longAndLat;
         longAndLat = Double.toString(latitude) + ' ' + longitude;
         textView.setText(longAndLat);
@@ -117,7 +123,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             cotEvent.setUID("enemy_location");
             cotEvent.setTime(time);
             cotEvent.setStart(time);
-            cotEvent.setHow("h-e");
+            cotEvent.setHow("G-U-C-I");
             cotEvent.setType("enemy");
             //cotEvent.setDetail();
             cotEvent.setStale(time.addMinutes(10));
@@ -138,21 +144,21 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         });
 
     //noinspection AndroidLintClickableViewAccessibility
-    turret_imageView.setOnTouchListener(new View.OnTouchListener() {
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
-        public boolean onTouch(View view, android.view.MotionEvent motionEvent) {
-            ViewGroup.LayoutParams params = view.getLayoutParams();
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    params.width = 1000;
-                    params.height = 1000;
-                    view.setLayoutParams(params);
+        turret_imageView.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View view, android.view.MotionEvent motionEvent) {
+                ViewGroup.LayoutParams params = view.getLayoutParams();
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        params.width = 1000;
+                        params.height = 1000;
+                        view.setLayoutParams(params);
                     break;
-                case MotionEvent.ACTION_UP:
-                    params.width = 55;
-                    params.height = 55;
-                    view.setLayoutParams(params);
+                    case MotionEvent.ACTION_UP:
+                        params.width = 55;
+                        params.height = 55;
+                        view.setLayoutParams(params);
                     break;
             }
             return true;
@@ -169,7 +175,6 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                         params.width = 1000;
                         params.height = 1000;
                         view.setLayoutParams(params);
-//                        hull_imageView.getLayoutParams().width = 100;
                         break;
                     case MotionEvent.ACTION_UP:
                         params.width = 55;
