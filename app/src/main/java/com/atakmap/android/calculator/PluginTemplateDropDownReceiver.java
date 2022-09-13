@@ -1,8 +1,7 @@
 
-package com.atakmap.android.plugintemplate;
+package com.atakmap.android.calculator;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.view.MotionEvent;
@@ -16,10 +15,11 @@ import android.widget.TextView;
 import com.atak.plugins.impl.PluginLayoutInflater;
 import com.atakmap.android.cot.CotMapComponent;
 import com.atakmap.android.maps.MapView;
-import com.atakmap.android.plugintemplate.plugin.R;
+
 import com.atakmap.android.dropdown.DropDown.OnStateListener;
 import com.atakmap.android.dropdown.DropDownReceiver;
 
+import com.atakmap.android.plugintemplate.plugin.R;
 import com.atakmap.coremap.cot.event.CotEvent;
 import com.atakmap.coremap.cot.event.CotPoint;
 import com.atakmap.coremap.log.Log;
@@ -33,7 +33,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     public static final String TAG = PluginTemplateDropDownReceiver.class
             .getSimpleName();
 
-    public static final String SHOW_PLUGIN = "com.atakmap.android.plugintemplate.SHOW_PLUGIN";
+    public static final String SHOW_PLUGIN = "com.atakmap.android.Calculator.SHOW_PLUGIN";
 
     private final TextView textView;
     private final TextView calculatedPos;
@@ -96,19 +96,23 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         calculate_xys.setOnClickListener(view -> {
 
             String azim = azimuthEditText.getText().toString();
-            azimuth = Double.parseDouble(azim);
 
             String hull = hullEditText.getText().toString();
-            hull_angle = Double.parseDouble(hull);
 
             String dist = distanceEditText.getText().toString();
-            distance = Double.parseDouble(dist)/100000;
+
+//            if (distance == 0 || dist.equals("") || azim.equals("") || hull.equals("")){
+//                Toast toast = Toast.makeText(context, "Enter valid data", Toast.LENGTH_SHORT);
+//                toast.show();
+//            } else {
+
+            azimuth = Double.parseDouble(azim);
+            hull_angle = Double.parseDouble(hull);
+            distance = Double.parseDouble(dist) / 100000;
 
             sum_azimuth = hull_angle + azimuth;
-            if (sum_azimuth > 6000)
-                sum_azimuth = sum_azimuth - 6000;
 
-            thousands_azimuth = (sum_azimuth) * ((float)3/50);
+            thousands_azimuth = (sum_azimuth) * ((float) 3 / 50);
             Xb = latitude + (distance * Math.sin(thousands_azimuth));
             Yb = longitude + (distance * Math.cos(thousands_azimuth));
 
@@ -130,6 +134,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             cotEvent.setPoint(cotPoint);
 
             CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+        //}
         });
 
 

@@ -99,6 +99,7 @@ dependencies {
         exclude module: 'collection'
         exclude module: 'customview'
     }
+    testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
 
@@ -193,6 +194,7 @@ android {
 
     defaultConfig {
         minSdkVersion 21
+        applicationId "com.atakmap.android.calculator"
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86"
         }

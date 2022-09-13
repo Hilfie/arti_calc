@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CalculatorFragment">
 
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <Button
         android:id="@+id/calculate_xys"
         style="@style/darkButton"
@@ -50,9 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="26dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginEnd="48dp"
         android:layout_toStartOf="@+id/target_azimuth"
         android:text="Turret rotation"
         android:textSize="12sp" />
@@ -63,9 +65,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="26dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginEnd="48dp"
         android:layout_toStartOf="@+id/target_azimuth"
         android:text="Hull rotation"
         android:textSize="12sp" />
@@ -139,12 +141,12 @@
         style="@style/darkButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/calculated_LongAndLat"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="125dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="125dp"
-        android:layout_marginBottom="10dp"
         android:text="Refresh self position" />
 
     <ImageView
@@ -153,7 +155,7 @@
         android:layout_height="25dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="130dp"
         android:src="@drawable/img_20200930_092739"
         android:visibility="visible"
@@ -166,11 +168,11 @@
         android:layout_height="25dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="174dp"
         android:src="@drawable/img_20200930_100111"
         android:visibility="visible"
         tools:src="@drawable/img_20200930_100111"
         tools:visibility="visible" />
-
 </RelativeLayout>
+</ScrollView>
