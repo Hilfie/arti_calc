@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.atak.plugins.impl.PluginLayoutInflater;
 import com.atakmap.android.cot.CotMapComponent;
@@ -82,6 +83,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         //buttons
         Button calculate_xys = calculateView.findViewById(R.id.calculate_xys);
         Button refresh_cords = calculateView.findViewById(R.id.refresh_cords);
+        Button add_new_point = calculate_xys.findViewById(R.id.add_new_point);
 
         //wstępne ustalanie położenia
         latitude = mapView.getSelfMarker().getPoint().getLatitude();
@@ -101,42 +103,48 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
             String dist = distanceEditText.getText().toString();
 
-//            if (distance == 0 || dist.equals("") || azim.equals("") || hull.equals("")){
-//                Toast toast = Toast.makeText(context, "Enter valid data", Toast.LENGTH_SHORT);
-//                toast.show();
-//            } else {
+//          if (distance == 0 || dist.equals("") || azim.equals("") || hull.equals("")){
+//              Toast toast = Toast.makeText(context, "Enter valid data", Toast.LENGTH_SHORT);
+//              toast.show();
+//          } else {
 
-            azimuth = Double.parseDouble(azim);
-            hull_angle = Double.parseDouble(hull);
-            distance = Double.parseDouble(dist) / 100000;
+                azimuth = Double.parseDouble(azim);
+                hull_angle = Double.parseDouble(hull);
+                distance = Double.parseDouble(dist) / 100000;
 
-            sum_azimuth = hull_angle + azimuth;
+                sum_azimuth = hull_angle + azimuth;
 
-            thousands_azimuth = (sum_azimuth) * ((float) 3 / 50);
-            Xb = latitude + (distance * Math.sin(thousands_azimuth));
-            Yb = longitude + (distance * Math.cos(thousands_azimuth));
+                thousands_azimuth = (sum_azimuth) * ((float) 3 / 50);
+                Xb = latitude + (distance * Math.sin(thousands_azimuth));
+                Yb = longitude + (distance * Math.cos(thousands_azimuth));
 
-            String calculatedPosition;
-            calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
-            calculatedPos.setText(calculatedPosition);
+                String calculatedPosition;
+                calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
+                calculatedPos.setText(calculatedPosition);
 
-            CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
-            CotEvent cotEvent = new CotEvent();
-            CoordinatedTime time = new CoordinatedTime();
+                CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
+                CotEvent cotEvent = new CotEvent();
+                CoordinatedTime time = new CoordinatedTime();
 
-            cotEvent.setUID("enemy_location");
-            cotEvent.setTime(time);
-            cotEvent.setStart(time);
-            cotEvent.setHow("G-U-C-I");
-            cotEvent.setType("enemy");
-            //cotEvent.setDetail();
-            cotEvent.setStale(time.addMinutes(10));
-            cotEvent.setPoint(cotPoint);
+                cotEvent.setUID("enemy_location");
+                cotEvent.setTime(time);
+                cotEvent.setStart(time);
+                cotEvent.setHow("G-U-C-C-I");
+                cotEvent.setType("enemy");
+                //cotEvent.setDetail();
+                cotEvent.setStale(time.addMinutes(10));
+                cotEvent.setPoint(cotPoint);
 
-            CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-        //}
+                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+            //}
         });
 
+
+        add_new_point.setOnClickListener(view -> {
+
+
+
+        });
 
 
         /******REFRESH_SELF*******/
@@ -146,6 +154,9 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             String up_longAndLat;
             up_longAndLat = Double.toString(latitude) + ' ' + longitude;
             textView.setText(up_longAndLat);
+
+            Toast toastRefresh = Toast.makeText(context, "Position refreshed", Toast.LENGTH_SHORT);
+            toastRefresh.show();
         });
 
     //noinspection AndroidLintClickableViewAccessibility
