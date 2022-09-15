@@ -49,8 +49,41 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     private double longitude;
     private double sum_azimuth;
     private double thousands_azimuth;
+//    private static int pointCounter;
+//    private String uid;
     double Xb;
     double Yb;
+
+
+    public CotEvent createPoint(){
+        String xb = Double.toString(Xb);
+        String yb = Double.toString(Yb);
+
+
+        if(xb.equals("") || yb.equals("")){
+            xb = "0";
+            yb = "0";
+        }
+
+        CotPoint cotPoint = new CotPoint(Double.parseDouble(xb), Double.parseDouble(yb), 0.0, 1.0, 1.0);
+        CotEvent cotEvent = new CotEvent();
+        CoordinatedTime time = new CoordinatedTime();
+
+        cotEvent.setUID("enemy_location");
+        cotEvent.setTime(time);
+        cotEvent.setStart(time);
+        cotEvent.setHow("G-U-C-C-I");
+        cotEvent.setType("enemy");
+        //cotEvent.setDetail();
+        cotEvent.setStale(time.addMinutes(10));
+        cotEvent.setPoint(cotPoint);
+
+        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+
+    return cotEvent;
+    }
+
+
 
     /**************************** CONSTRUCTOR *****************************/
 
@@ -94,6 +127,8 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         longAndLat = Double.toString(latitude) + ' ' + longitude;
         textView.setText(longAndLat);
 
+        //calculate_xys.set
+
         /*******CALCULATE********/
         calculate_xys.setOnClickListener(view -> {
 
@@ -103,48 +138,64 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
             String dist = distanceEditText.getText().toString();
 
-//          if (distance == 0 || dist.equals("") || azim.equals("") || hull.equals("")){
-//              Toast toast = Toast.makeText(context, "Enter valid data", Toast.LENGTH_SHORT);
-//              toast.show();
-//          } else {
 
-                azimuth = Double.parseDouble(azim);
-                hull_angle = Double.parseDouble(hull);
-                distance = Double.parseDouble(dist) / 100000;
+          if (distance != 0 && !dist.equals("") && !azim.equals("") && !hull.equals("")) {
 
-                sum_azimuth = hull_angle + azimuth;
 
-                thousands_azimuth = (sum_azimuth) * ((float) 3 / 50);
-                Xb = latitude + (distance * Math.sin(thousands_azimuth));
-                Yb = longitude + (distance * Math.cos(thousands_azimuth));
+              azimuth = Double.parseDouble(azim);
+              hull_angle = Double.parseDouble(hull);
+              distance = Double.parseDouble(dist) / 100000;
 
-                String calculatedPosition;
-                calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
-                calculatedPos.setText(calculatedPosition);
+              sum_azimuth = hull_angle + azimuth;
 
-                CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
-                CotEvent cotEvent = new CotEvent();
-                CoordinatedTime time = new CoordinatedTime();
+              thousands_azimuth = (sum_azimuth) * ((float) 3 / 50);
+              Xb = latitude + (distance * Math.sin(thousands_azimuth));
+              Yb = longitude + (distance * Math.cos(thousands_azimuth));
 
-                cotEvent.setUID("enemy_location");
-                cotEvent.setTime(time);
-                cotEvent.setStart(time);
-                cotEvent.setHow("G-U-C-C-I");
-                cotEvent.setType("enemy");
-                //cotEvent.setDetail();
-                cotEvent.setStale(time.addMinutes(10));
-                cotEvent.setPoint(cotPoint);
+              String calculatedPosition;
+              calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
+              calculatedPos.setText(calculatedPosition);
 
-                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-            //}
+              CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
+              CotEvent cotEvent = new CotEvent();
+              CoordinatedTime time = new CoordinatedTime();
+
+              cotEvent.setUID("enemy_location");
+              cotEvent.setTime(time);
+              cotEvent.setStart(time);
+              cotEvent.setHow("G-U-C-C-I");
+              cotEvent.setType("enemy");
+              //cotEvent.setDetail();
+              cotEvent.setStale(time.addMinutes(10));
+              cotEvent.setPoint(cotPoint);
+
+              CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+
+//                CotEvent cotEvent = createPoint();
+//                cotEvent.setUID("enemy");
+//
+//                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+          }
+          else {
+              Toast toast = Toast.makeText(context, "Enter valid data", Toast.LENGTH_SHORT);
+              toast.show();
+          }
         });
 
 
-        add_new_point.setOnClickListener(view -> {
-
-
-
-        });
+//        add_new_point.setOnClickListener(view -> {
+//            double xb = Xb;
+//            double yb = Yb;
+//
+//            CotEvent cotEvent = createPoint();
+//            pointCounter++;
+//            uid = "UID" + pointCounter;
+//            cotEvent.setUID(uid);
+//            CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+//            String calculatedPosition;
+//            calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
+//            calculatedPos.setText(calculatedPosition);
+//        });
 
 
         /******REFRESH_SELF*******/
@@ -160,46 +211,38 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         });
 
     //noinspection AndroidLintClickableViewAccessibility
-        turret_imageView.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View view, android.view.MotionEvent motionEvent) {
-                ViewGroup.LayoutParams params = view.getLayoutParams();
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        params.width = 1000;
-                        params.height = 1000;
-                        view.setLayoutParams(params);
+        turret_imageView.setOnTouchListener((view, motionEvent) -> {
+            ViewGroup.LayoutParams params = view.getLayoutParams();
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    params.width = 1000;
+                    params.height = 1000;
+                    view.setLayoutParams(params);
+                break;
+                case MotionEvent.ACTION_UP:
+                    params.width = 55;
+                    params.height = 55;
+                    view.setLayoutParams(params);
+                break;
+        }
+        return true;
+    });
+        //noinspection AndroidLintClickableViewAccessibility
+        hull_imageView.setOnTouchListener((view, motionEvent) -> {
+            ViewGroup.LayoutParams params = view.getLayoutParams();
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    params.width = 1000;
+                    params.height = 1000;
+                    view.setLayoutParams(params);
                     break;
-                    case MotionEvent.ACTION_UP:
-                        params.width = 55;
-                        params.height = 55;
-                        view.setLayoutParams(params);
+                case MotionEvent.ACTION_UP:
+                    params.width = 55;
+                    params.height = 55;
+                    view.setLayoutParams(params);
                     break;
             }
             return true;
-        }
-    });
-        //noinspection AndroidLintClickableViewAccessibility
-        hull_imageView.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View view, android.view.MotionEvent motionEvent) {
-                ViewGroup.LayoutParams params = view.getLayoutParams();
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        params.width = 1000;
-                        params.height = 1000;
-                        view.setLayoutParams(params);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        params.width = 55;
-                        params.height = 55;
-                        view.setLayoutParams(params);
-                        break;
-                }
-                return true;
-            }
         });
 
         }
