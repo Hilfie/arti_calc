@@ -14,13 +14,13 @@
         android:id="@+id/calculate_xys"
         style="@style/darkButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_height="36dp"
+        android:layout_below="@+id/hull_azimuth"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="214dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="34dp"
+        android:layout_toEndOf="@+id/add_new_point"
         android:text="Calculate target position" />
 
          />
@@ -156,16 +156,16 @@
         android:layout_marginEnd="125dp"
         android:text="Refresh self position" />
 
-<!--    <Button-->
-<!--        android:id="@+id/add_new_point"-->
-<!--        style="@style/darkButton"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/refreshed_button"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_marginStart="133dp"-->
-<!--        android:layout_marginTop="26dp"-->
-<!--        android:text="Add another target" />-->
+    <Button
+        android:id="@+id/add_new_point"
+        style="@style/darkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="11dp"
+        android:text="Add target to map" />
 
     <ImageView
         android:id="@+id/turret_image"

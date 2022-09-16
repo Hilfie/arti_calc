@@ -49,23 +49,21 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     private double longitude;
     private double sum_azimuth;
     private double thousands_azimuth;
-//    private static int pointCounter;
-//    private String uid;
+    private static int pointCounter;
+    private String uid;
     double Xb;
     double Yb;
 
 
-    public CotEvent createPoint(){
-        String xb = Double.toString(Xb);
-        String yb = Double.toString(Yb);
+    public CotEvent createPoint(double xb, double yb){
+
+//        if(xb.equals("") || yb.equals("")){
+//            xb = "0";
+//            yb = "0";
+//        }
 
 
-        if(xb.equals("") || yb.equals("")){
-            xb = "0";
-            yb = "0";
-        }
-
-        CotPoint cotPoint = new CotPoint(Double.parseDouble(xb), Double.parseDouble(yb), 0.0, 1.0, 1.0);
+        CotPoint cotPoint = new CotPoint((xb), (yb), 0.0, 1.0, 1.0);
         CotEvent cotEvent = new CotEvent();
         CoordinatedTime time = new CoordinatedTime();
 
@@ -116,7 +114,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         //buttons
         Button calculate_xys = calculateView.findViewById(R.id.calculate_xys);
         Button refresh_cords = calculateView.findViewById(R.id.refresh_cords);
-      //  Button add_new_point = calculate_xys.findViewById(R.id.add_new_point);
+        Button add_new_point = calculateView.findViewById(R.id.add_new_point);
 
         //wstępne ustalanie położenia
         latitude = mapView.getSelfMarker().getPoint().getLatitude();
@@ -156,25 +154,26 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                   calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
                   calculatedPos.setText(calculatedPosition);
 
-                  CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
-                  CotEvent cotEvent = new CotEvent();
-                  CoordinatedTime time = new CoordinatedTime();
+//                  CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
+//                  CotEvent cotEvent = new CotEvent();
+//                  CoordinatedTime time = new CoordinatedTime();
+//
+//                  cotEvent.setUID("enemy_location");
+//                  cotEvent.setTime(time);
+//                  cotEvent.setStart(time);
+//                  cotEvent.setHow("G-U-C-C-I");
+//                  cotEvent.setType("enemy");
+//                  //cotEvent.setDetail();
+//                  cotEvent.setStale(time.addMinutes(10));
+//                  cotEvent.setPoint(cotPoint);
+//
+//                  CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
 
-                  cotEvent.setUID("enemy_location");
-                  cotEvent.setTime(time);
-                  cotEvent.setStart(time);
-                  cotEvent.setHow("G-U-C-C-I");
-                  cotEvent.setType("enemy");
-                  //cotEvent.setDetail();
-                  cotEvent.setStale(time.addMinutes(10));
-                  cotEvent.setPoint(cotPoint);
-
-                  CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-
-//                CotEvent cotEvent = createPoint();
+//                CotEvent cotEvent = createPoint(Xb, Yb);
 //                cotEvent.setUID("enemy");
 //
 //                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+
               } else {
                   Toast toast = Toast.makeText(context, "Distance must be greater than 0", Toast.LENGTH_SHORT);
                   toast.show();
@@ -188,19 +187,18 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         });
 
 
-//        add_new_point.setOnClickListener(view -> {
-//            double xb = Xb;
-//            double yb = Yb;
-//
-//            CotEvent cotEvent = createPoint();
-//            pointCounter++;
-//            uid = "UID" + pointCounter;
-//            cotEvent.setUID(uid);
-//            CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-//            String calculatedPosition;
-//            calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
-//            calculatedPos.setText(calculatedPosition);
-//        });
+        add_new_point.setOnClickListener(view -> {
+
+            CotEvent cotEvent = createPoint(Xb, Yb);
+            pointCounter++;
+            uid = "UID" + pointCounter;
+            cotEvent.setUID(uid);
+            CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+            String calculatedPosition;
+            calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
+            calculatedPos.setText(calculatedPosition);
+
+        });
 
 
         /******REFRESH_SELF*******/
