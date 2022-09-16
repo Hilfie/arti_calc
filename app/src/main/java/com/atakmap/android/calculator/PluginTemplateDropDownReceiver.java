@@ -76,7 +76,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         cotEvent.setStale(time.addMinutes(10));
         cotEvent.setPoint(cotPoint);
 
-        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+//        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
 
     return cotEvent;
     }
@@ -154,6 +154,9 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                   calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
                   calculatedPos.setText(calculatedPosition);
 
+                  if(!add_new_point.isEnabled()){
+                      add_new_point.setEnabled(true);
+                  }
 //                  CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
 //                  CotEvent cotEvent = new CotEvent();
 //                  CoordinatedTime time = new CoordinatedTime();
@@ -191,7 +194,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
             CotEvent cotEvent = createPoint(Xb, Yb);
             pointCounter++;
-            uid = "UID" + pointCounter;
+            uid = "enemy_location" + pointCounter;
             cotEvent.setUID(uid);
             CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
             String calculatedPosition;

@@ -165,7 +165,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="55dp"
         android:layout_marginTop="11dp"
-        android:text="Add target to map" />
+        android:text="Add target to map"
+        android:enabled="false" />
 
     <ImageView
         android:id="@+id/turret_image"
