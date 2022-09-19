@@ -17,6 +17,7 @@ POINT OF CONTACTS
 
 (Who is developing this)
 
+Created by Krystian Palczak
 _________________________________________________________________
 PORTS REQUIRED
 
