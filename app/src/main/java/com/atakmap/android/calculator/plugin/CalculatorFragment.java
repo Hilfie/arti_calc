@@ -1,4 +1,4 @@
-package com.atakmap.android.plugintemplate.plugin;
+package com.atakmap.android.calculator.plugin;
 
 
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.atakmap.android.plugintemplate.plugin.R;
 
 public class CalculatorFragment extends Fragment {
 

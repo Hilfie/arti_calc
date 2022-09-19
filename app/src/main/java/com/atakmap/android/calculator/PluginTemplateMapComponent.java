@@ -1,5 +1,5 @@
 
-package com.atakmap.android.plugintemplate;
+package com.atakmap.android.calculator;
 
 import android.content.Context;
 import android.content.Intent;

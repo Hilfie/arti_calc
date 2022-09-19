@@ -1,4 +1,4 @@
-package com.atakmap.android.plugintemplate.plugin;
+package com.atakmap.android.calculator.plugin;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.atak.plugins.impl.PluginLayoutInflater;
+import com.atakmap.android.plugintemplate.plugin.R;
 
 /**
  * A simple {@link Fragment} subclass.

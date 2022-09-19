@@ -1,8 +1,9 @@
 
-package com.atakmap.android.plugintemplate.plugin;
+package com.atakmap.android.calculator.plugin;
 
+import com.atakmap.android.calculator.PluginTemplateDropDownReceiver;
 import com.atakmap.android.ipc.AtakBroadcast;
-import com.atakmap.android.plugintemplate.PluginTemplateDropDownReceiver;
+import com.atakmap.android.plugintemplate.plugin.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,7 +32,7 @@ public class PluginTemplateTool extends Tool implements ToolDescriptor {
     @Override
     public Drawable getIcon() {
         return (context == null) ? null
-                : context.getResources().getDrawable(R.drawable.ic_launcher);
+                : context.getResources().getDrawable(R.drawable.calc_icon);
     }
 
     @Override
