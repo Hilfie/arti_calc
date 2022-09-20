@@ -108,4 +108,11 @@
     </style>
 
 
+    <style name="roundedEdit" parent="@android:style/Widget.EditText">
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

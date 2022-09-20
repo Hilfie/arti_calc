@@ -1,15 +1,19 @@
 package com.atakmap.android.calculator.plugin;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.atak.plugins.impl.PluginLayoutInflater;
+import com.atakmap.android.maps.MapView;
 import com.atakmap.android.plugintemplate.plugin.R;
 
 /**
@@ -29,6 +33,11 @@ public class RadiostationFragment extends Fragment {
     private String mParam2;
     private  Button markButton;
     private  TextView textView;
+    private MapView mapView;
+    //private final View calculateView;
+
+    private double longitude;
+    private double latitude;
 
 
     public RadiostationFragment() {
@@ -57,7 +66,13 @@ public class RadiostationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+//        // Inflate the layout for this fragment
+//        calculateView = PluginLayoutInflater.inflate(context, R.layout.calculator_layout, null);
+//        textView = calculateView.findViewById(R.id.longLatTextView);
+//
+//        latitude = mapView.getSelfMarker().getPoint().getLatitude();
+//        longitude = mapView.getSelfMarker().getPoint().getLongitude();
+
 
         return inflater.inflate(R.layout.radiostation_layout, container, false);
     }
