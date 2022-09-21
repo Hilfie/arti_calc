@@ -88,6 +88,7 @@
 
     <com.atakmap.android.gui.EditText
         android:id="@+id/target_distance"
+        style="@style/roundedEdit"
         android:layout_width="140dp"
         android:layout_height="28dp"
         android:layout_alignParentTop="true"
@@ -99,6 +100,7 @@
 
     <com.atakmap.android.gui.EditText
         android:id="@+id/target_azimuth"
+        style="@style/roundedEdit"
         android:layout_width="140dp"
         android:layout_height="28dp"
         android:layout_below="@+id/target_distance"
@@ -110,6 +112,7 @@
 
     <com.atakmap.android.gui.EditText
         android:id="@+id/hull_azimuth"
+        style="@style/roundedEdit"
         android:layout_width="140dp"
         android:layout_height="28dp"
         android:layout_below="@+id/target_azimuth"
@@ -152,21 +155,21 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="125dp"
         android:text="Refresh self position" />
 
     <Button
         android:id="@+id/add_new_point"
         style="@style/darkButton"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_width="129dp"
+        android:layout_height="38dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="55dp"
         android:layout_marginTop="11dp"
-        android:text="Add target to map"
-        android:enabled="false" />
+        android:enabled="false"
+        android:text="Add target to map" />
 
     <ImageView
         android:id="@+id/turret_image"

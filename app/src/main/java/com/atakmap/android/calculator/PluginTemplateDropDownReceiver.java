@@ -57,12 +57,6 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
     public CotEvent createPoint(double xb, double yb){
 
-//        if(xb.equals("") || yb.equals("")){
-//            xb = "0";
-//            yb = "0";
-//        }
-
-
         CotPoint cotPoint = new CotPoint((xb), (yb), 0.0, 1.0, 1.0);
         CotEvent cotEvent = new CotEvent();
         CoordinatedTime time = new CoordinatedTime();
@@ -75,8 +69,6 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         //cotEvent.setDetail();
         cotEvent.setStale(time.addMinutes(10));
         cotEvent.setPoint(cotPoint);
-
-//        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
 
     return cotEvent;
     }
@@ -151,37 +143,16 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                   Yb = longitude + (distance * Math.cos(thousands_azimuth));
 
                   String calculatedPosition;
-                  calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
+                  calculatedPosition = Double.toString(Xb).substring(0,7) + ' ' + Double.toString(Yb).substring(0,7);
                   calculatedPos.setText(calculatedPosition);
 
                   if(!add_new_point.isEnabled()){
                       add_new_point.setEnabled(true);
                   }
-//                  CotPoint cotPoint = new CotPoint(Xb, Yb, 0.0, 1.0, 1.0);
-//                  CotEvent cotEvent = new CotEvent();
-//                  CoordinatedTime time = new CoordinatedTime();
-//
-//                  cotEvent.setUID("enemy_location");
-//                  cotEvent.setTime(time);
-//                  cotEvent.setStart(time);
-//                  cotEvent.setHow("G-U-C-C-I");
-//                  cotEvent.setType("enemy");
-//                  //cotEvent.setDetail();
-//                  cotEvent.setStale(time.addMinutes(10));
-//                  cotEvent.setPoint(cotPoint);
-//
-//                  CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-
-//                CotEvent cotEvent = createPoint(Xb, Yb);
-//                cotEvent.setUID("enemy");
-//
-//                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-
               } else {
                   Toast toast = Toast.makeText(context, "Distance must be greater than 0", Toast.LENGTH_SHORT);
                   toast.show();
               }
-
           }
           else{
               Toast toast = Toast.makeText(context, "Enter valid data", Toast.LENGTH_SHORT);
@@ -198,7 +169,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             cotEvent.setUID(uid);
             CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
             String calculatedPosition;
-            calculatedPosition = Double.toString(Xb) + ' ' + (Yb);
+            calculatedPosition = Double.toString(Xb)+ ' ' + Double.toString(Yb);
             calculatedPos.setText(calculatedPosition);
 
         });
@@ -209,7 +180,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             latitude = mapView.getSelfMarker().getPoint().getLatitude();
             longitude = mapView.getSelfMarker().getPoint().getLongitude();
             String up_longAndLat;
-            up_longAndLat = Double.toString(latitude) + ' ' + longitude;
+            up_longAndLat = Double.toString(latitude).substring(0,7) + ' ' + Double.toString(longitude).substring(0,7);
             textView.setText(up_longAndLat);
 
             Toast toastRefresh = Toast.makeText(context, "Position refreshed", Toast.LENGTH_SHORT);
