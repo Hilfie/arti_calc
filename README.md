@@ -1,36 +1,20 @@
-(Plugin Name)
 
-Calculator
-_________________________________________________________________
-PURPOSE AND CAPABILITIES
+# Calculator for ATAK
 
-(General Description)
+ATAK Calculator plugin used to calculate target's position
 
-Calculator used for calculating coordinates of an object, using own position, distance to target and turret and hull rotation of the tank.
-_________________________________________________________________
-STATUS
+________
 
-(In Progress?  Expected release?  Released?  To Who?  When?)
+Kalkulator do aplikacji ATAK służący do obliczania współrzędnych celu
 
-_________________________________________________________________
-POINT OF CONTACTS
+## Funkcjonalności
 
-(Who is developing this)
+- Obliczanie współrzędnych celu
+- Rysowanie pozycji celu na mapie
 
-Created by Krystian Palczak
-_________________________________________________________________
-PORTS REQUIRED
 
-(This is important for ATO, networking, and other security concerns)
 
-_________________________________________________________________
-EQUIPMENT REQUIRED
+## Autor
 
-_________________________________________________________________
-EQUIPMENT SUPPORTED
+- Krystian Palczak [@Hilfie](https://github.com/Hilfie)
 
-_________________________________________________________________
-COMPILATION
-
-_________________________________________________________________
-DEVELOPER NOTES
